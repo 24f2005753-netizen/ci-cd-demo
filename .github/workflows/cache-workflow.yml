@@ -1,4 +1,4 @@
-name: Cache Dependencies Example
+name: Cache and Required Step Workflow
 
 on:
   workflow_dispatch:
@@ -11,21 +11,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      # Step 1: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.11'
-
-      - name: Prime cache-89f785d
+      # Step 2: Cache dependencies (required step)
+      - name: prime-cache-89f785d
         id: cache-step
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: cache-89f785d
 
+      # Step 3: Print cache hit/miss
       - name: Check cache hit/miss
         run: |
           if [ "${{ steps.cache-step.outputs.cache-hit }}" == "true" ]; then
@@ -34,3 +32,6 @@ jobs:
             echo "Cache miss"
           fi
 
+      # Step 4: Required step with your email
+      - name: 24f2005753@ds.study.iitm.ac.in
+        run: echo "Hello, world!"
