@@ -1,7 +1,7 @@
 name: Cache Dependencies Example
 
 on:
-  workflow_dispatch: # allows manual trigger
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -25,9 +25,12 @@ jobs:
         with:
           path: ~/.cache/pip
           key: cache-89f785d
+
+      - name: Check cache hit/miss
         run: |
-          if [ -f ${{ steps.cache-step.outputs.cache-hit }} ]; then
-              echo "Cache hit"
+          if [ "${{ steps.cache-step.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache hit"
           else
-              echo "Cache miss"
+            echo "Cache miss"
           fi
+
