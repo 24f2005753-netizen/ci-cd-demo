@@ -12,12 +12,14 @@ class TestLongestPositiveStreak(unittest.TestCase):
     def test_all_positive_numbers(self):
         self.assertEqual(longest_positive_streak([1, 2, 3]), 3)
 
-    def test_mixed_numbers(self):
-        self.assertEqual(longest_positive_streak([1, 2, -3, 4, 5, 6]), 3)
+    def test_mixed_numbers_longer_streak_at_end(self):
+        self.assertEqual(longest_positive_streak([1, 2, -3, 4, 5, 6, 7]), 4)
 
-    def test_streaks_at_beginning_and_end(self):
+    def test_mixed_numbers_longer_streak_at_beginning(self):
         self.assertEqual(longest_positive_streak([1, 2, 3, -1, -2, 4, 5]), 3)
-        self.assertEqual(longest_positive_streak([1, 2, -1, -2, 3, 4, 5]), 3)
+
+    def test_streak_of_one(self):
+        self.assertEqual(longest_positive_streak([-1, 2, -3, 4, -5, 6]), 1)
 
 if __name__ == '__main__':
     unittest.main()
